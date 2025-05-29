@@ -257,7 +257,7 @@ export const SignUpView = () => {
             </div>
         </form>
         </Form>
-        <div className="bg-gradient-to-br from-green-600 to-green-800 relative hidden md:flex flex-col gap-y-4 items-center justify-center">
+        <div className="bg-gradient-to-br from-sidebar-accent to-sidebar relative hidden md:flex flex-col gap-y-4 items-center justify-center">
             <Image src="/logo.svg" alt="SuperMeet Logo" height={92} width={92} className="bg-transparent" />
             <p className="text-3xl font-semibold text-white">
                 SuperMeet
