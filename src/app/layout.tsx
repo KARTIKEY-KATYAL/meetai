@@ -12,6 +12,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "SuperMeet",
   description: "Your super AI Powered Chat App",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({
@@ -22,9 +25,7 @@ export default function RootLayout({
   return (
     <TRPCReactProvider>
       <html lang="en">
-        <body className={`${inter.variable} dark antialiased`}>
-          {children}
-        </body>
+        <body className={`${inter.variable} dark antialiased`}>{children}</body>
       </html>
     </TRPCReactProvider>
   );
