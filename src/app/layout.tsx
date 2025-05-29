@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Meet AI",
+  title: "SuperMeet",
   description: "Your super AI Powered Chat App",
 };
 
