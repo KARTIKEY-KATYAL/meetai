@@ -1,18 +1,18 @@
-import React from 'react'
-import { HomeView } from '../modules/home/ui/views/home.view'
-import { auth } from '@/lib/auth'
-import { headers } from 'next/headers'
-import { redirect } from 'next/navigation'
+import React from "react";
+import { HomeView } from "../modules/home/ui/views/home.view";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
-const page = async() => {
-  const session = await auth.api.getSession(({
-    headers : await headers()
-  }))
+const page = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-  if (!session){
-    redirect("/sign-in")
+  if (!session) {
+    redirect("/sign-in");
   }
-  return <HomeView/>
-}
+  return <HomeView />;
+};
 
-export default page
+export default page;
