@@ -47,6 +47,8 @@ export const verification = pgTable("verification", {
 	updatedAt: timestamp('updated_at').$defaultFn(() => /* @__PURE__ */ new Date())
 });
 
+// Tables
+
 export const agents = pgTable("agents", {
 	id: text('id')
 		.primaryKey()
