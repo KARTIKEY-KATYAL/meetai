@@ -4,13 +4,16 @@ import { createTRPCRouter, baseProcedure, protectedProcedure } from "@/trpc/init
 import { TRPCError } from "@trpc/server";
 import { agentsInsertSchema } from "../schemas";
 import {string, z} from "zod"
-import { eq } from "drizzle-orm";
+import { eq, getTableColumns, sql } from "drizzle-orm";
 
 export const agentsRouter = createTRPCRouter({
     // Change getMany to use 'ProtectedProcedure'
     getOne: protectedProcedure.input(z.object({id : string()})).query(async ({input}) => {
         const [existingAgent] = await db
-            .select()
+            .select({
+                ...getTableColumns(agents),
+                meetingCount:sql<number>`5`,
+            })
             .from(agents)
             .where(eq(agents.id, input.id))
         // throw new TRPCError({"code" : "BAD_REQUEST"})
