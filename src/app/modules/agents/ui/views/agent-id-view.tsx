@@ -3,7 +3,11 @@
 import ErrorState from "@/components/error-state";
 import Loading from "@/components/loading-state";
 import { useTRPC } from "@/trpc/client";
-import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 import { AgentIdViewHeader } from "../components/agent-id-view";
 import { GeneratedAvatar } from "@/components/generated-avatar";
 import { Badge } from "@/components/ui/badge";
@@ -26,18 +30,20 @@ export const AgentIdView = ({ agentId }: Props) => {
     trpc.agents.getOne.queryOptions({ id: agentId })
   );
 
-  const [updateAgentDialogOpen, setupdateAgentDialogOpen] = useState(false)
+  const [updateAgentDialogOpen, setupdateAgentDialogOpen] = useState(false);
 
   const removeAgent = useMutation(
     trpc.agents.remove.mutationOptions({
       onSuccess: async () => {
-        await queryClient.invalidateQueries(trpc.agents.getMany.queryOptions({}));
-        router.push('/agents');
+        await queryClient.invalidateQueries(
+          trpc.agents.getMany.queryOptions({})
+        );
+        router.push("/agents");
         toast.success("Agent deleted successfully");
       },
       onError: (error) => {
         toast.error(error.message);
-      }
+      },
     })
   );
 
@@ -59,7 +65,7 @@ export const AgentIdView = ({ agentId }: Props) => {
   return (
     <>
       <RemoveConfirmation />
-      <UpdateAgentdialog 
+      <UpdateAgentdialog
         open={updateAgentDialogOpen}
         onOpenChange={setupdateAgentDialogOpen}
         initialValues={data}
@@ -68,10 +74,10 @@ export const AgentIdView = ({ agentId }: Props) => {
         <AgentIdViewHeader
           agentid={agentId}
           agentName={data.name}
-          onEdit={() => setupdateAgentDialogOpen(true)}
+          onEdit={async () => setupdateAgentDialogOpen(true)}
           onRemove={handleRemoveAgent}
         />
-        
+
         <div className="bg-card rounded-xl border border-border shadow-sm overflow-hidden">
           <div className="p-6 space-y-6">
             {/* Agent Header */}
@@ -86,13 +92,14 @@ export const AgentIdView = ({ agentId }: Props) => {
                   <h2 className="text-2xl font-bold text-foreground">
                     {data.name}
                   </h2>
-                  <Badge 
-                    variant="outline" 
+                  <Badge
+                    variant="outline"
                     className="mt-2 flex items-center gap-2 w-fit bg-blue-50 dark:bg-blue-950/50 border-blue-200 dark:border-blue-800"
                   >
                     <VideoIcon className="size-4 text-blue-600 dark:text-blue-400" />
                     <span className="text-blue-700 dark:text-blue-300">
-                      {data.meetingCount} {data.meetingCount === 1 ? "meeting" : "meetings"}
+                      {data.meetingCount}{" "}
+                      {data.meetingCount === 1 ? "meeting" : "meetings"}
                     </span>
                   </Badge>
                 </div>
@@ -119,10 +126,7 @@ export const AgentIdView = ({ agentId }: Props) => {
 
 export const AgentIdViewLoading = () => {
   return (
-    <Loading 
-      title="Loading Agent" 
-      description="This may take a few seconds" 
-    />
+    <Loading title="Loading Agent" description="This may take a few seconds" />
   );
 };
 

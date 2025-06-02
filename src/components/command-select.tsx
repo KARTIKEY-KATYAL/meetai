@@ -1,0 +1,78 @@
+import { ReactNode , useState } from "react";
+import { Button } from "./ui/button";
+import { ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { CommandEmpty, CommandInput, CommandItem, CommandList, CommandResponsiveDialog } from "./ui/command";
+
+
+interface Props {
+  options: Array<{
+    id: string;
+    value: string;
+    children: ReactNode;
+  }>;
+  onSelect: (value: string) => void;
+  onSearch: (value: string) => void;
+  value: string;
+  placeholder?: string;
+  isSearchable?: boolean;
+  className?: string;
+}
+
+
+export const CommandSelect = ({
+    options,
+    onSelect,
+    onSearch,
+    value,
+    placeholder = 'Select an Option',
+    className
+} : Props) =>{
+    const [open, setopen] = useState(false)
+    const selectedOption = options.find((option)=>option.value === value)
+
+    return (
+        <>
+        <Button
+        onClick={()=>setopen(true)}
+        type="button"
+        variant="outline"
+        className={cn(
+            "h-9 justify-between font-normal px-2",
+            !selectedOption && "text-muted-foreground",
+            className,
+        )}
+        >
+            <div>
+                {selectedOption?.children ?? placeholder}
+            </div>
+            <ChevronsUpDown/>
+        </Button>
+        <CommandResponsiveDialog
+        shouldFilter = {!onSearch}
+        open = {open}
+        onOpenChange={setopen}
+        >
+            <CommandInput placeholder="Search..." onValueChange={onSearch}/>
+            <CommandList>
+                <CommandEmpty>
+                    <span className="text-muted-foreground text-sm">
+                        No Options found
+                    </span>
+                </CommandEmpty>
+                {options.map((option)=>{
+                    return <CommandItem
+                    key={option.id}
+                    onSelect={()=>{
+                        onSelect(option.value)
+                        setopen(false)
+                    }}
+                    >
+                        {option.children}
+                    </CommandItem>
+                })}
+            </CommandList>
+        </CommandResponsiveDialog>
+        </>
+    )
+}

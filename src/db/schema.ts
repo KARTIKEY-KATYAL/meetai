@@ -1,7 +1,7 @@
 import { pgTable, text, timestamp, boolean, pgEnum } from "drizzle-orm/pg-core";
 import { nanoid } from "nanoid"
 
-export const meetingstatus = pgEnum("meeting_status",[
+export const meetingstatus = pgEnum("meeting_status", [
 	"upcoming",
 	"active",
 	"completed",
@@ -81,12 +81,12 @@ export const meetings = pgTable("meetings", {
 	agentId: text("agent_id")
 		.notNull()
 		.references(() => agents.id, { onDelete: "cascade" }),
-	status:meetingstatus("status").notNull().default("upcoming"),
+	status: meetingstatus("status").notNull().default("upcoming"),
 	started_At: timestamp("started_at"),
 	ended_At: timestamp("ended_at"),
-	transcriptUrl:text("transcript_url"),
-	recordingUrl:text("recording_url"),
-	summary:text("summary"),
+	transcriptUrl: text("transcript_url"),
+	recordingUrl: text("recording_url"),
+	summary: text("summary"),
 	created_At: timestamp("created_at").notNull().defaultNow(),
 	updated_At: timestamp("updated_at").notNull().defaultNow()
 })

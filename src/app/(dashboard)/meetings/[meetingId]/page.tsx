@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const page = () => {
   return (
-    <div>Meeting Page Id</div>
-  )
-}
+    <div>
+      Meeting Page Id
+    </div>
+    )
+};
 
-export default page
+export default page;

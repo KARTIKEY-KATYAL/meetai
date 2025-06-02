@@ -10,27 +10,27 @@ import {
 } from "lucide-react";
 import React from "react";
 import DashBoardCommand from "./dashboard-command";
-import { useState ,useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const DashBoardNavBar = () => {
   const { state, toggleSidebar, isMobile } = useSidebar();
-  const [commandOpen, setcommandOpen] = useState(false)
+  const [commandOpen, setcommandOpen] = useState(false);
 
   useEffect(() => {
-    const down =(e:KeyboardEvent)=>{
-        if (e.key === 'k' && (e.metaKey || e.ctrlKey)){
-            e.preventDefault()
-            setcommandOpen((open) => !(open))
-        }
-    }
-    document.addEventListener('keydown' , down)
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setcommandOpen((open) => !open);
+      }
+    };
+    document.addEventListener("keydown", down);
 
-    return () => document.removeEventListener("keydown",down)
-  }, [])
-  
+    return () => document.removeEventListener("keydown", down);
+  }, []);
+
   return (
     <>
-    <DashBoardCommand open={commandOpen} setOpen={setcommandOpen}/>
+      <DashBoardCommand open={commandOpen} setOpen={setcommandOpen} />
       <nav className="flex gap-x-2 px-4 items-center py-3 border-b bg-background">
         <Button
           className="size-9 cursor-pointer"
@@ -47,7 +47,7 @@ const DashBoardNavBar = () => {
           className="h-9 w-[240px] justify-start font-normal text-muted-foreground hover:text-muted-foreground"
           variant="outline"
           size="sm"
-          onClick={() => setcommandOpen((open) => !(open))}
+          onClick={() => setcommandOpen((open) => !open)}
         >
           <SearchIcon />
           Search
