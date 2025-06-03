@@ -11,6 +11,10 @@ import { useConfrim } from "@/hooks/use-confrim"
 import { UpdateMeetingdialog } from "../components/update-meeting-dialog"
 import { useState } from "react"
 import { meetings } from "@/db/schema"
+import UpcomingState from "@/components/upcoming-state"
+import ActiveState from "@/components/active-state"
+import CancelledState from "@/components/cancellled-state"
+import ProcessingState from "@/components/processing-state"
 
 interface Props {
     meetingId : string
@@ -70,8 +74,16 @@ export const MeetingIdView = ({ meetingId }: Props) => {
           onEdit={async () => setupdateMeetingDialogOpen(true)}
           onRemove={handleRemove}
         />
+        {isCancelled && <CancelledState/>}
+        {isProcessing && <ProcessingState/>}
+        {isCompleted && <div>Completed</div>}
+        {isActive && <ActiveState meetingId={meetingId} / > }
+        {isUpcoming && <UpcomingState
+        meetingId={meetingId}
+        onCancelMeeting={()=>{}}
+        isCancelling={false}
+        />}
       </div>
-      {JSON.stringify(data,null,2)}
     </>
   );
 };
