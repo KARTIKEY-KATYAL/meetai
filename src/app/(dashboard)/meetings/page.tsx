@@ -11,10 +11,20 @@ import { MeetingListHeader } from "@/app/modules/meetings/ui/components/meetings
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { loadSearchParams } from "@/app/modules/agents/params";
+import { SearchParams } from "nuqs/server";
 
-const page = async () => {
+interface Props{
+  SearchParams:Promise<SearchParams>
+}
+
+const page = async ({SearchParams}:Props) => {
+  const filters = await loadSearchParams(SearchParams)
+
   const queryClient = getQueryClient();
-  void queryClient.prefetchQuery(trpc.meetings.getMany.queryOptions({}));
+  void queryClient.prefetchQuery(trpc.meetings.getMany.queryOptions({
+    ...filters
+  }));
   const session = await auth.api.getSession({
     headers: await headers(),
   });
