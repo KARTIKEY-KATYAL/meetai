@@ -10,7 +10,8 @@
     "push": "drizzle-kit push",
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate",
-    "studio": "drizzle-kit studio"
+    "studio": "drizzle-kit studio",
+    "dev:webhook": "ngrok http --url=magpie-united-terrier.ngrok-free.app 3000"
   },
   "dependencies": {
     "@dicebear/collection": "^9.2.2",
@@ -44,6 +45,7 @@
     "@radix-ui/react-toggle-group": "^1.1.10",
     "@radix-ui/react-tooltip": "^1.2.7",
     "@stream-io/node-sdk": "^0.4.24",
+    "@stream-io/openai-realtime-api": "^0.2.0",
     "@stream-io/video-react-sdk": "^1.18.3",
     "@tanstack/react-query": "^5.79.0",
     "@tanstack/react-table": "^8.21.3",
