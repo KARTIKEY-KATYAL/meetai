@@ -6,8 +6,7 @@ import { GeneratedAvatar } from "@/components/generated-avatar"
 import { CircleCheckIcon, CircleXIcon, ClockArrowUpIcon, ClockFadingIcon, CornerDownRight, LoaderIcon, VideoIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import {format} from "date-fns"
-import humanizeDuration from "humanize-duration"
-import { cn } from "@/lib/utils"
+import { cn, formatduration } from "@/lib/utils"
 // import {cn} from "../../../../"
 
 export type Payment = {
@@ -17,13 +16,6 @@ export type Payment = {
   email: string
 }
 
-function formatduration(seconds:number){
-    return humanizeDuration(seconds*1000,{
-        largest : 1,
-        round : true,
-        units: ["h","m","s"]
-    })
-}
 
 const statusIconMap = {
     upcoming:ClockArrowUpIcon,
